@@ -2,6 +2,8 @@
 const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
 const navLinks = document.querySelector('.nav-links');
 const header = document.querySelector('.header');
+const themeToggle = document.querySelector('.theme-toggle');
+const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
 
 // Function to close mobile menu
 function closeMobileMenu() {
@@ -10,7 +12,8 @@ function closeMobileMenu() {
 }
 
 // Toggle mobile menu
-mobileMenuBtn.addEventListener('click', () => {
+mobileMenuBtn.addEventListener('click', (e) => {
+    e.stopPropagation(); // Prevent event from bubbling up
     navLinks.classList.toggle('active');
     mobileMenuBtn.classList.toggle('active');
 });
@@ -329,28 +332,46 @@ document.addEventListener('visibilitychange', () => {
     }
 });
 
-// Dark Mode Toggle
-const themeToggle = document.querySelector('.theme-toggle');
-const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-
-// Function to set theme
+// Function to set theme with enhanced mobile support
 function setTheme(theme) {
+    // Set theme attribute on html element instead of documentElement
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
     
-    // Update toggle button icon
-    const icon = themeToggle.querySelector('i');
-    if (theme === 'dark') {
-        icon.classList.remove('fa-moon');
-        icon.classList.add('fa-sun');
+    // Force a repaint on mobile devices
+    document.body.style.display = 'none';
+    document.body.offsetHeight; // Trigger a reflow
+    document.body.style.display = '';
+    
+    // Update toggle button icon with a slight delay to ensure smooth transition
+    setTimeout(() => {
+        const icon = themeToggle.querySelector('i');
+        if (theme === 'dark') {
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        } else {
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
+        }
+    }, 50);
+
+    // Update meta theme-color for mobile devices
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    if (!metaThemeColor) {
+        const meta = document.createElement('meta');
+        meta.name = 'theme-color';
+        meta.content = theme === 'dark' ? '#1a1a1a' : '#ffffff';
+        document.head.appendChild(meta);
     } else {
-        icon.classList.remove('fa-sun');
-        icon.classList.add('fa-moon');
+        metaThemeColor.content = theme === 'dark' ? '#1a1a1a' : '#ffffff';
     }
 }
 
-// Initialize theme
+// Initialize theme with mobile detection
 function initializeTheme() {
+    // Check if running on a mobile device
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
         setTheme(savedTheme);
@@ -359,27 +380,60 @@ function initializeTheme() {
     } else {
         setTheme('light');
     }
+
+    // Add specific class for mobile devices
+    if (isMobile) {
+        document.documentElement.classList.add('is-mobile');
+    }
 }
 
-// Toggle theme
-themeToggle.addEventListener('click', () => {
+// Toggle theme with enhanced touch handling
+themeToggle.addEventListener('click', (e) => {
+    e.stopPropagation(); // Prevent event from bubbling up
     const currentTheme = document.documentElement.getAttribute('data-theme');
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
     
-    // Add animation class
-    document.body.classList.add('theme-transition');
-    setTimeout(() => {
-        document.body.classList.remove('theme-transition');
-    }, 300);
+    // Add transition class
+    document.documentElement.classList.add('theme-transition');
     
-    setTheme(newTheme);
+    // Set theme after a short delay to ensure smooth transition
+    setTimeout(() => {
+        setTheme(newTheme);
+    }, 50);
+    
+    // Remove transition class
+    setTimeout(() => {
+        document.documentElement.classList.remove('theme-transition');
+    }, 300);
 });
 
-// Listen for system theme changes
+// Enhanced system theme change detection
 prefersDarkScheme.addEventListener('change', (e) => {
-    const newTheme = e.matches ? 'dark' : 'light';
-    setTheme(newTheme);
+    // Only auto-switch if user hasn't manually set a theme
+    if (!localStorage.getItem('theme')) {
+        const newTheme = e.matches ? 'dark' : 'light';
+        setTheme(newTheme);
+    }
+});
+
+// Handle page visibility changes
+document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+        // Refresh theme when page becomes visible again
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        setTheme(currentTheme);
+    }
 });
 
 // Initialize theme on page load
-initializeTheme(); 
+document.addEventListener('DOMContentLoaded', () => {
+    initializeTheme();
+});
+
+// Ensure proper theme on mobile orientation change
+window.addEventListener('orientationchange', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    setTimeout(() => {
+        setTheme(currentTheme);
+    }, 100);
+}); 
