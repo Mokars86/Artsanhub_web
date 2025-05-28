@@ -1,0 +1,196 @@
+Logo (Top-left)
+
+Navigation Links (Top-right):
+
+Home
+
+How It Works
+
+Services
+
+Download App
+
+Web Version
+
+Sign In
+
+
+
+> Sticky header on scroll, with a subtle shadow.
+
+
+
+
+---
+
+✅ 2. Hero Section
+
+Main Headline:
+“Find Trusted Local Help — Anytime, Anywhere.”
+
+Subtext:
+“Whether you need a plumber, electrician, or cleaner, we connect you with verified professionals in your area.”
+
+Primary CTA Button:
+Download the App → links to App Store / Google Play
+
+Secondary CTA Button:
+Use Web Version → links to web login/dashboard
+
+Hero Image:
+
+Smartphone mockup showing the app interface
+
+Optional animation or background video (e.g., handyman at work)
+
+
+
+
+---
+
+✅ 3. Features Section
+
+3-4 Cards with Icons & Short Descriptions:
+
+🔍 Easy Search and Booking
+
+⭐ Verified & Rated Service Providers
+
+💬 In-App Messaging
+
+🧾 Transparent Pricing & Scheduling
+
+
+
+
+---
+
+✅ 4. How It Works Section
+
+Step-by-step UI preview with illustrations:
+
+Step 1: Create an Account
+
+Step 2: Choose a Service
+
+Step 3: Book & Pay Securely
+
+Step 4: Get Help at Your Doorstep
+
+
+
+
+---
+
+✅ 5. Service Categories Grid
+
+Responsive grid of service types (cards with icons or images):
+
+Plumbing
+
+Electrical
+
+Cleaning
+
+Painting
+
+Carpentry
+
+Gardening
+
+More...
+
+
+
+
+---
+
+✅ 6. App Download Promotion
+
+Phone mockups with real screenshots of the app
+
+Download Buttons:
+
+Google Play Store
+
+Apple App Store
+
+
+QR code to download app directly
+
+
+
+---
+
+✅ 7. Desktop/Web Version CTA
+
+Highlight benefit of desktop usage
+
+Button: Go to Web App
+
+Browser mockup of web dashboard or interface
+
+
+
+---
+
+✅ 8. Testimonials Section
+
+User reviews in slider format:
+
+Name, picture, stars, comment
+
+Trust badges (e.g., “Google Reviews”, “App Store Rated 4.9”)
+
+
+
+
+---
+
+✅ 9. FAQ Section
+
+Accordion-style dropdowns
+
+Sample questions:
+
+“Is the app free?”
+
+“How do I become a service provider?”
+
+“Can I use the app on desktop?”
+
+
+
+
+---
+
+✅ 10. Footer
+
+Quick Links:
+
+About Us
+
+Contact
+
+Privacy Policy
+
+Terms of Service
+
+
+Social Icons: Facebook, Twitter, Instagram, LinkedIn
+
+Newsletter Signup
+
+
+
+---
+
+🔥 Design Style (Modern UI)
+
+Font: Inter, Poppins, or SF Pro
+
+Color Scheme: Soft neutral background (e.g., #f5f6f9), blue primary (e.g., #007bff), vibrant CTA colors
+
+UI Elements: Rounded corners, shadows, glassmorphism effects, micro animations
+
+Responsiveness: Mobile-first, collapsible menu, adaptive grid
